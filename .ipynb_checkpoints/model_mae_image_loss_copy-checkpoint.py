@@ -63,7 +63,6 @@ class MaskedAutoencoderViT(nn.Module):
             ]
         )
         self.norm = norm_layer(embed_dim)
-        
         # --------------------------------------------------------------------------
 
         # # --------------------------------------------------------------------------
@@ -283,18 +282,18 @@ class MaskedAutoencoderViT(nn.Module):
     def forward(self, imgs, mask_ratio=0.75):
         # This has the class token appended to it
         latent, mask, ids_restore = self.forward_encoder(imgs, mask_ratio)
-        # This also has the class token
-        latent_vanilla = self.forward_vanilla(imgs)
+        # # This also has the class token
+        # latent_vanilla = self.forward_vanilla(imgs)
 
-        cls_vanilla = latent_vanilla[:, 0, :]
-        predicted_class = self.head(cls_vanilla)  # Class predictions by the network
+        # cls_vanilla = latent_vanilla[:, 0, :]
+        # predicted_class = self.head(cls_vanilla)  # Class predictions by the network
 
-        # This doesnt have class token
+        # # This doesnt have class token
         # pred_decoder = self.forward_decoder(latent, ids_restore)
 
-        #loss_twobranch = self.forward_loss(imgs, pred_decoder, mask)
-        return predicted_class # loss_twobranch
-        #return latent
+        # loss_twobranch = self.forward_loss(imgs, pred_decoder, mask)
+        # return loss_twobranch, predicted_class
+        return latent
 
     def forward_test(self, imgs):
         output = self.forward_vanilla(imgs)
