@@ -8,6 +8,7 @@ import numpy as np
 import argparse
 import torch
 import torch.nn as nn
+import pandas as pd
 import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms
@@ -123,3 +124,8 @@ print("\n***Top Eigenvalues: ", top_eigenvalues)
 print("\n***Trace: ", np.mean(trace))
 
 get_esd_plot(density_eigen, density_weight)
+df = pd.DataFrame(columns = ['density_eigen', 'density_weight'])
+df['density_eigen'] = density_eigen
+df['density_weight'] = density_weight
+# save in a csv file
+df.to_csv('hassian-plot.csv')
