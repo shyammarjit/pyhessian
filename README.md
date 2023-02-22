@@ -1,3 +1,10 @@
+```
+df = pd.DataFrame(columns = ['density_eigen', 'density_weight'])
+df['density_eigen'] = density_eigen
+df['density_weight'] = density_weight
+# save in a csv file
+df.to_csv('hassian-plot.csv')
+```
 ![Block](misc/pyhessian-01.png)
 
 ![Block](misc/hessian.png)
